@@ -80,7 +80,6 @@ export function useInfrastructure() {
       .from('aruba_panels')
       .update(updates)
       .eq('id', id)
-      .eq('user_id', requireUser().id)
       .select()
       .single();
     
@@ -92,8 +91,7 @@ export function useInfrastructure() {
     const { error } = await supabase
       .from('aruba_panels')
       .delete()
-      .eq('id', id)
-      .eq('user_id', requireUser().id);
+      .eq('id', id);
     
     if (error) throw error;
   };
@@ -116,7 +114,6 @@ export function useInfrastructure() {
       .from('domains')
       .update(updates)
       .eq('id', id)
-      .eq('user_id', requireUser().id)
       .select()
       .single();
     if (error) throw error;
@@ -127,8 +124,7 @@ export function useInfrastructure() {
     const { error } = await supabase
       .from('domains')
       .delete()
-      .eq('id', id)
-      .eq('user_id', requireUser().id);
+      .eq('id', id);
     if (error) throw error;
   };
 
@@ -150,7 +146,6 @@ export function useInfrastructure() {
       .from('databases')
       .update(updates)
       .eq('id', id)
-      .eq('user_id', requireUser().id)
       .select()
       .single();
     if (error) throw error;
@@ -161,8 +156,7 @@ export function useInfrastructure() {
     const { error } = await supabase
       .from('databases')
       .delete()
-      .eq('id', id)
-      .eq('user_id', requireUser().id);
+      .eq('id', id);
     if (error) throw error;
   };
 
@@ -183,7 +177,6 @@ export function useInfrastructure() {
       .from('pec_emails')
       .update(updates)
       .eq('id', id)
-      .eq('user_id', requireUser().id)
       .select()
       .single();
     if (error) throw error;
@@ -194,8 +187,7 @@ export function useInfrastructure() {
     const { error } = await supabase
       .from('pec_emails')
       .delete()
-      .eq('id', id)
-      .eq('user_id', requireUser().id);
+      .eq('id', id);
     if (error) throw error;
   };
 
@@ -216,7 +208,6 @@ export function useInfrastructure() {
       .from('subscriptions')
       .update(updates)
       .eq('id', id)
-      .eq('user_id', requireUser().id)
       .select()
       .single();
     if (error) throw error;
@@ -227,8 +218,7 @@ export function useInfrastructure() {
     const { error } = await supabase
       .from('subscriptions')
       .delete()
-      .eq('id', id)
-      .eq('user_id', requireUser().id);
+      .eq('id', id);
     if (error) throw error;
   };
 
