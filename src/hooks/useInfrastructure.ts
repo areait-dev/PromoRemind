@@ -21,7 +21,6 @@ export function useInfrastructure() {
     const { data, error } = await supabase
       .from('aruba_panels')
       .select('*, domains(*), databases(*, db_slots(*))')
-      .eq('user_id', user.id)
       .order('created_at', { ascending: false });
     
     setLoading(false);
@@ -38,7 +37,6 @@ export function useInfrastructure() {
     const { data, error } = await supabase
       .from('pec_emails')
       .select('*')
-      .eq('user_id', user.id)
       .order('created_at', { ascending: false });
 
     setLoading(false);
@@ -55,7 +53,6 @@ export function useInfrastructure() {
     const { data, error } = await supabase
       .from('subscriptions')
       .select('*')
-      .eq('user_id', user.id)
       .order('created_at', { ascending: false });
 
     setLoading(false);
