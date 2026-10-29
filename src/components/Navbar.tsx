@@ -15,7 +15,7 @@ const NAV_LINKS = [
 ];
 
 export default function Navbar() {
-  const { signOut } = useAuth();
+  const { user, signOut } = useAuth();
   const location = useLocation();
   const pathname = location.pathname;
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,8 +23,8 @@ export default function Navbar() {
   const lastScrollY = useRef(0);
 
 
-  // Static avatar from public folder
-  const avatarUrl = "/adriano200.png";
+  // Sigla: prime due lettere dell'email (areait@... -> AR)
+  const initials = (user?.email ?? '?').replace(/[^a-z0-9]/gi, '').slice(0, 2).toUpperCase() || '?';
 
   // Smart Visibility Logic: un solo listener, aggiornato al massimo una volta per frame
   useEffect(() => {
@@ -144,10 +144,10 @@ export default function Navbar() {
               </span>
             </div>
             <div className={`
-              rounded-full overflow-hidden flex items-center justify-center transition-all duration-500
-              ${isScrolled ? 'h-11 w-11' : 'h-14 w-14 md:h-14 md:w-14'}
+              rounded-full flex items-center justify-center bg-elevated border border-divider text-link font-semibold tracking-wide transition-all duration-500 group-hover:border-accent
+              ${isScrolled ? 'h-11 w-11 text-sm' : 'h-14 w-14 text-base'}
             `}>
-              <img src={avatarUrl} alt="Profilo" className="w-full h-full object-cover scale-100 group-hover:scale-110 transition-transform duration-700" />
+              {initials}
             </div>
           </button>
         </div>
