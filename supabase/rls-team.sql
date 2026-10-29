@@ -37,11 +37,12 @@ create policy "team_domains"       on public.domains       for all to authentica
 create policy "team_pec_emails"    on public.pec_emails    for all to authenticated using (public.is_team_member()) with check (public.is_team_member());
 create policy "team_subscriptions" on public.subscriptions for all to authenticated using (public.is_team_member()) with check (public.is_team_member());
 
-insert into public.team_users (user_id) values
-  ('d8210374-9963-4778-8669-07122771f94e'),
-  ('341a12a1-e952-4a64-ab27-5a3ba65bdb3d')
+-- Membri del team (l'id viene ricavato dall'email)
+insert into public.team_users (user_id)
+select id from auth.users
+where email in ('areait@promotergroup.eu', 'comunicazione@promotergroup.eu')
 on conflict do nothing;
 
 commit;
 
-select * from public.team_users;
+select t.user_id, u.email from public.team_users t join auth.users u on u.id = t.user_id;
