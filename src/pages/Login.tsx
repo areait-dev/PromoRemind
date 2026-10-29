@@ -34,11 +34,12 @@ export default function Login() {
     setEmailError('');
     setPasswordError('');
     let valid = true;
+    const cleanEmail = email.trim().toLowerCase();
 
-    if (!email) {
+    if (!cleanEmail) {
       setEmailError('Inserisci la tua email!');
       valid = false;
-    } else if (!/^[\w-.]+@[\w-]+\.[a-zA-Z]{2,}$/.test(email)) {
+    } else if (!/^[\w-.]+@[\w-]+\.[a-zA-Z]{2,}$/.test(cleanEmail)) {
       setEmailError('Inserisci un indirizzo email valido!');
       valid = false;
     }
@@ -52,7 +53,7 @@ export default function Login() {
 
     setLoading(true);
     try {
-      await signIn(email, password, rememberMe);
+      await signIn(cleanEmail, password, rememberMe);
       navigate('/dashboard');
     } catch (err) {
       setError(getErrorMessage(err) || 'Errore durante il login');
@@ -106,6 +107,9 @@ export default function Login() {
                     </div>
                     <input
                       type="email"
+                      autoComplete="username"
+                      autoCapitalize="none"
+                      spellCheck={false}
                       placeholder="nome@azienda.it"
                       className="input pl-12"
                       value={email}
@@ -135,6 +139,7 @@ export default function Login() {
                     </div>
                     <input
                       type={showPassword ? 'text' : 'password'}
+                      autoComplete="current-password"
                       placeholder="••••••••"
                       className="input pl-12 pr-12"
                       value={password}
