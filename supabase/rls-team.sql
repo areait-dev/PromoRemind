@@ -39,7 +39,7 @@ create policy "team_subscriptions" on public.subscriptions for all to authentica
 
 insert into public.team_users (user_id) values
   ('d8210374-9963-4778-8669-07122771f94e'),
-  ('abab169f-89a9-488c-ad4a-631507c74eb6')
+  ('341a12a1-e952-4a64-ab27-5a3ba65bdb3d')
 on conflict do nothing;
 
 commit;
